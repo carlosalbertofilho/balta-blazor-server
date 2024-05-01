@@ -49,16 +49,16 @@
      // dotnet dev-certs https --trust; dotnet dev-certs https -ep "${HOME}/.aspnet/https/aspnetapp.pfx" -p "SecurePwdGoesHere"
 	 // 
 	//Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [5000, 5001],
-	"remoteEnv": {
-        "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-        "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx"
-    },
-	"portsAttributes": {
-			"5001": {
-				"protocol": "https"
-			}
-	},
+	// "forwardPorts": [5000, 5001],
+	// "remoteEnv": {
+    //     "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
+    //     "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx"
+    // },
+	// "portsAttributes": {
+	// 		"5001": {
+	// 			"protocol": "https"
+	// 		}
+	// },
 
 	// postCreateCommand.sh parameters: $1=SA password, $2=dacpac path, $3=sql script(s) path
 	"postCreateCommand": "bash .devcontainer/mssql/postCreateCommand.sh '1q2w3e4r@#$' './bin/Debug/' './.devcontainer/mssql/'"
