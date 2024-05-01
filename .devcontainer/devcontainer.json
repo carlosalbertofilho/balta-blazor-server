@@ -50,7 +50,7 @@
 	"forwardPorts": [5000, 5001],
 	"remoteEnv": {
         "ASPNETCORE_Kestrel__Certificates__Default__Password": "SecurePwdGoesHere",
-        "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx",
+        "ASPNETCORE_Kestrel__Certificates__Default__Path": "${containerEnv:HOME}/.aspnet/https/aspnetapp.pfx"
     },
 	"portsAttributes": {
 			"5001": {
