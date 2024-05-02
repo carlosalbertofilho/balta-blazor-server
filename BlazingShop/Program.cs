@@ -42,6 +42,7 @@ static void IsDevelopment(WebApplication app)
 
 static void appAddComponents(WebApplication app)
 {
+    // Configure the HTTP request pipeline.
     app.UseHttpsRedirection();
 
     app.UseStaticFiles();
