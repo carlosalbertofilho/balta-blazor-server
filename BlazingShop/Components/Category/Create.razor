@@ -1,0 +1,54 @@
+﻿@page "/categories/create"
+@inject AppDbContext Context
+@inject NavigationManager NavigationManager
+
+<h3>Create Category</h3>
+
+<div class="mb-5">
+    <EditForm Model="@category" OnValidSubmit="@HandleValidSubmit" FormName="categoryForm">
+        <DataAnnotationsValidator />
+
+        <div class="mb-3 form-group">
+            <label for="Name" class="form-label">Name</label>
+            <InputText id="Name" class="form-control" @bind-Value="category.Name" />
+        </div>
+        <div class="mb-3 form-group">
+            <label for="Description" class="form-label">Description</label>
+            <InputText id="Description" class="form-control" @bind-Value="category.Description" />
+        </div>
+        @if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="alert alert-danger" role="alert">
+                @errorMessage
+            </div>
+        }
+
+        <div class="d-flex flex-row justify-content-between">
+            <NavLink class="btn btn-danger" href="categories">Cancel</NavLink>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+               
+
+        <ValidationSummary />
+    </EditForm>
+</div>
+
+@code {
+    private Category category = new();
+    private string? errorMessage = null;
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            category.Id = 0;
+            await Context.Categories.AddAsync(category);
+            await Context.SaveChangesAsync();
+            NavigationManager.NavigateTo("/categories");
+        }
+        catch
+        {
+            errorMessage = "Falha ao persistir os dados";
+        }
+    }
+}

@@ -1,0 +1,75 @@
+﻿@page "/categories"
+
+@inject AppDbContext Context
+
+<h3>Categories</h3>
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger" role="alert">
+        @errorMessage
+    </div>
+}
+
+@if (_categories.Count == 0)
+{
+    <p class="text-center"><em>No categories registered.</em></p>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var category in _categories)
+            {
+                <tr>
+                    <td scope="col">@category.Id</td>
+                    <td scope="col">@category.Name</td>
+                    <td scope="col">@category.Description</td>
+                    <td scope="col">
+                        <div class="btn-group">
+                            <button class="btn btn-outline-primary">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-outline-danger ">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<section class="d-flex justify-content-end">
+    <NavLink class="btn btn-primary" href="categories/create">
+        <span class="bi bi-plus">Add Category</span>
+    </NavLink>
+</section>
+
+
+@code {
+    private List<Category> _categories = [];
+    private string? errorMessage = null;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _categories = await Context.Categories.AsNoTracking().ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message;
+        }
+    }
+
+
+}

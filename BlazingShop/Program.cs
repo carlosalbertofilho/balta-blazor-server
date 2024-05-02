@@ -25,8 +25,8 @@ static void builderAddComponents(WebApplicationBuilder builder)
     {
         options.ListenAnyIP(5001, listenOptions =>
         {
-            listenOptions.UseHttps("/workspaces/balta-blazor-server/.aspnet/https/aspnetapp.pfx",
-            "SecurePwdGoesHere");
+            //listenOptions.UseHttps("/workspaces/balta-blazor-server/.aspnet/https/aspnetapp.pfx","SecurePwdGoesHere");
+            listenOptions.UseHttps("C:\\Users\\solra\\.aspnet\\https\\aspnetapp.pfx", "SecurePwdGoesHere");
         });
     });
     // Add services to the container.
