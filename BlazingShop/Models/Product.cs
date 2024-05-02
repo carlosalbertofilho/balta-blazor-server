@@ -1,12 +1,19 @@
 namespace  BlazingShop.Models;
 
-public class Product
+public class Product(
+    int id,
+    string name,
+    string description,
+    string? imageUrl,
+    decimal price,
+    Category category
+)
 {
-    public int Id { get; set; }
-    public string Title { get; set; } = "";
-    public string Image { get; set; } = "";
-    public string Description { get; set; } = "";
-    public int Price { get; set; }
-    public int CategoryId { get; set; }
-    public Category Category { get; set; } = new();
+    public int Id { get; set; } = id;
+    public string Name { get; set; } = name;
+    public string Description { get; set; } = description;
+    public string? ImageUrl { get; set; } = imageUrl;
+    public decimal Price { get; set; } = price;
+    public int CategoryId { get; set; } = category.Id;
+    public Category Category { get; set; } = category;
 }
