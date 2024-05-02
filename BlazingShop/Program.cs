@@ -1,5 +1,7 @@
 using BlazingShop.Components;
+using BlazingShop.Data;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,9 @@ app.Run();
 
 static void builderAddComponents(WebApplicationBuilder builder)
 {
+    // Add Db Context
+    var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
     // Configure o caminho do certificado SSL
     builder.WebHost.UseKestrel(options =>
     {
