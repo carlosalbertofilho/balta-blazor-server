@@ -41,7 +41,6 @@
     {
         try
         {
-            category.Id = 0;
             await Context.Categories.AddAsync(category);
             await Context.SaveChangesAsync();
             NavigationManager.NavigateTo("/categories");
